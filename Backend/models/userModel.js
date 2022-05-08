@@ -43,15 +43,33 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+//DOCUMENT MIDDLEWARES
+/**********************************/
+//Encrypt password before saving to database
 userSchema.pre("save", async function (next) {
   if (!this.isNew && !this.isModified("password")) return next();
   try {
-    this.password = await bcrypt.hash(this.password, 17);
+    this.password = await bcrypt.hash(this.password, 15);
     next();
   } catch (e) {
     throw new Error(e);
   }
 });
+/**********************************/
+
+//INSTANCE METHODS
+/**********************************/
+userSchema.methods.verifyPassword = async (
+  plainTextPassword,
+  hashedPassword
+) => {
+  try {
+    return await bcrypt.compare(plainTextPassword, hashedPassword);
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+/**********************************/
 
 const User = mongoose.model("User", userSchema);
 
