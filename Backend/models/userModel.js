@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Email is required"],
     validate: [validator.isEmail, "Email is invalid"],
     trim: true,
+    unique: [true, "Email must be unique"],
   },
   name: {
     type: String,
@@ -14,7 +15,7 @@ const userSchema = new mongoose.Schema({
     maxlength: [50, "Your name is too long"],
     trim: true,
   },
-  jobTitlte: {
+  jobTitle: {
     type: String,
     required: [true, "Job title is required"],
     maxlength: [50, "Job title is too long"],
