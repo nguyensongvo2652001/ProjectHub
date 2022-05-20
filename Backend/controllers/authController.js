@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const catchAsync = require("../utils/catchAsync");
 
 const { filterObject, createJsonWebToken } = require("../utils/helpers");
 
@@ -28,7 +29,7 @@ const createAndSendToken = async (args) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -45,9 +46,9 @@ const login = async (req, res, next) => {
   }
 
   createAndSendToken({ req, res, user, statusCode: 200 });
-};
+});
 
-const signUp = async (req, res, next) => {
+const signUp = catchAsync(async (req, res, next) => {
   //Sanitize user input
   const userInput = filterObject(req.body, {
     whiteList: ["email", "password", "jobTitle", "name"],
@@ -58,6 +59,6 @@ const signUp = async (req, res, next) => {
   //Hash the password (using user document middleware) BEFORE saving the user to the database
 
   createAndSendToken({ user, req, res, statusCode: 201 });
-};
+});
 
 module.exports = { signUp, login };
