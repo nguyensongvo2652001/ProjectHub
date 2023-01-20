@@ -1,0 +1,5 @@
+- Project required fields: 
+    + Name 
+    + Developers 
+    + Type 
+    + Description

@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 const { filterObject, createJsonWebToken } = require("../utils/helpers");
@@ -33,7 +34,7 @@ const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    //Handle error here
+    return next(new AppError("Email and password are required", 400));
   }
 
   const user = await User.findOne({ email }).select("+password");
@@ -42,7 +43,7 @@ const login = catchAsync(async (req, res, next) => {
     user && (await user.verifyPassword(password, user.password));
 
   if (!correctCredentials) {
-    //Handle error here
+    return next(new AppError("Incorrect email or password", 400));
   }
 
   createAndSendToken({ req, res, user, statusCode: 200 });
