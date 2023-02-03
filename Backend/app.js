@@ -1,13 +1,11 @@
 const express = require("express");
 
-const authRouter = require("./routers/authRouter");
-const errorController = require("./controllers/errorController");
-
 const app = express();
 
-app.use(express.json({ limit: process.env.MAX_BODY_SIZE }));
+app.use(express.json());
 
-app.use("/api/v1/users", authRouter);
-app.use(errorController);
+app.get("/", (req, res) => {
+  res.send("Goodbye World!");
+});
 
 module.exports = app;

@@ -1,23 +1,17 @@
 {
-  "name": "projecthub-backend",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Backend for ProjectHub",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --runInBand",
-    "start": "node server.js",
-    "debug": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "npx nodemon server.js"
   },
-  "author": "Nguyen Song Vo",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.18.1",
-    "jest": "^28.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.2",
-    "supertest": "^6.2.3",
-    "validator": "^13.7.0"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0"
   }
 }
